@@ -157,21 +157,7 @@ const StoryTimeline = () => {
     },
   ];
 
-  // const handleChapterComplete = (chapterId) => {
-  //   if (chapterId <= completedChapters + 1) {
-  //     setIsWalking(true)
 
-  //     setTimeout(() => {
-  //       setCompletedChapters(chapterId)
-  //       setIsWalking(false)
-  //       setCurrentChapter(chapters.find((c) => c.id === chapterId))
-  //       setShowStoryReader(true)
-  //       toast.success(`Chapter ${chapterId} unlocked!`)
-  //     }, 2000)
-  //   } else {
-  //     toast.error("Complete previous chapters first!")
-  //   }
-  // }
 
   const handleChapterComplete = (chapterId) => {
     if (chapterId <= completedChapters + 1) {

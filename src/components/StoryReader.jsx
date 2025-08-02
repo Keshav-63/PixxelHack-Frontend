@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, OrbitControls } from "@react-three/drei";
+import { useGLTF, OrbitControls, useAnimations } from "@react-three/drei";
 
 const TypewriterText = ({
   text,
@@ -59,12 +59,36 @@ const TypewriterText = ({
     </span>
   );
 };
-
 const WalkingModel = ({ emotion = "neutral" }) => {
-  const { scene } = useGLTF("/Walking_in_palce_1.compressed.glb");
+  const { scene, animations } = useGLTF("/anrgy_1.compressed.glb");
   const modelRef = useRef();
+  const { actions, mixer } = useAnimations(animations, modelRef);
+  const [randomAction, setRandomAction] = useState(null);
 
-  useFrame((state) => {
+  useEffect(() => {
+    // Get all animation names
+    const actionNames = Object.keys(actions);
+    if (actionNames.length > 0) {
+      // Pick one at random
+      const randomIndex = Math.floor(Math.random() * actionNames.length);
+      const selected = actionNames[randomIndex];
+      setRandomAction(selected);
+    }
+  }, [actions]);
+
+  useEffect(() => {
+    if (randomAction && actions[randomAction]) {
+      actions[randomAction].reset().fadeIn(0.3).play();
+    }
+    return () => {
+      if (randomAction && actions[randomAction]) {
+        actions[randomAction].fadeOut(0.3).stop();
+      }
+    };
+  }, [randomAction, actions]);
+
+  useFrame((state, delta) => {
+    mixer?.update(delta);
     if (modelRef.current) {
       modelRef.current.rotation.y =
         Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
@@ -80,6 +104,8 @@ const WalkingModel = ({ emotion = "neutral" }) => {
     />
   );
 };
+
+
 
 const StoryReader = ({ chapterId, onClose }) => {
   const [currentPage, setCurrentPage] = useState(0);
