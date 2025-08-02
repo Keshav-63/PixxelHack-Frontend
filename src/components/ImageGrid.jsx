@@ -15,9 +15,10 @@ const images = [
   "Images/chap2/panel_2.jpg",
   "Images/chap2/panel_3.jpg",
   "Images/chap3/Screenshot 2025-08-02 174045.png",
-  "Images/chap3/Screenshot 2025-08-02 174025.png",
-  "Images/chap4/Screenshot 2025-08-02 174654.png",
-  "Images/chap5/Screenshot 2025-08-02 174740.png",
+  "Images/chap3/Screenshot 2025-08-02 174225.png",
+  "Images/chap3/Screenshot 2025-08-02 174225.png",
+  "Images/chap3/Screenshot 2025-08-02 174026.png",
+  "Images/chap5/Screenshot 2025-08-02 174639.png",
   "Images/chap5/Screenshot 2025-08-02 174707.png",
 ];
 
